@@ -1,0 +1,29 @@
+# Q5: Blogging platform
+create 'Blog', 'blog', 'author', 'comments'
+
+put 'Blog', 'B001', 'blog:title', 'My First Post'
+put 'Blog', 'B001', 'blog:body', 'Learning HBase row keys and column families.'
+put 'Blog', 'B001', 'blog:created_at', '2026-10-01'
+put 'Blog', 'B001', 'author:author_id', 'A01'
+put 'Blog', 'B001', 'author:name', 'Aarav'
+put 'Blog', 'B001', 'comments:count', '1'
+put 'Blog', 'B001', 'comments:c1', 'Very useful post!'
+
+put 'Blog', 'B002', 'blog:title', 'Why NoSQL?'
+put 'Blog', 'B002', 'blog:body', 'A short comparison of database models.'
+put 'Blog', 'B002', 'blog:created_at', '2026-10-03'
+put 'Blog', 'B002', 'author:author_id', 'A02'
+put 'Blog', 'B002', 'author:name', 'Diya'
+put 'Blog', 'B002', 'comments:count', '0'
+
+put 'Blog', 'B003', 'blog:title', 'Cassandra Notes'
+put 'Blog', 'B003', 'blog:body', 'Notes from a CQL practice session.'
+put 'Blog', 'B003', 'blog:created_at', '2026-10-05'
+put 'Blog', 'B003', 'author:author_id', 'A03'
+put 'Blog', 'B003', 'author:name', 'Kabir'
+put 'Blog', 'B003', 'comments:count', '2'
+put 'Blog', 'B003', 'comments:c1', 'Thanks for sharing.'
+put 'Blog', 'B003', 'comments:c2', 'Please add more examples.'
+
+get 'Blog', 'B002'
+scan 'Blog'

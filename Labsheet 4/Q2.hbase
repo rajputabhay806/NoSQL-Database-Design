@@ -1,0 +1,25 @@
+# Q2: CRUD operations on Employee
+create 'Employee', 'info', 'job'
+
+# CREATE/INSERT
+put 'Employee', 'E001', 'info:name', 'Ananya Rao'
+put 'Employee', 'E001', 'info:department', 'IT'
+put 'Employee', 'E001', 'job:title', 'Developer'
+put 'Employee', 'E001', 'job:salary', '55000'
+put 'Employee', 'E002', 'info:name', 'Vikram Joshi'
+put 'Employee', 'E002', 'info:department', 'HR'
+put 'Employee', 'E002', 'job:title', 'Recruiter'
+put 'Employee', 'E002', 'job:salary', '48000'
+
+# READ one row and all rows
+get 'Employee', 'E001'
+scan 'Employee'
+
+# UPDATE: put overwrites the current cell value (creates a new cell version)
+put 'Employee', 'E001', 'job:salary', '60000'
+get 'Employee', 'E001'
+
+# DELETE one column, then a row
+delete 'Employee', 'E002', 'job:salary'
+deleteall 'Employee', 'E002'
+scan 'Employee'

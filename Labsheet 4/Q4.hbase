@@ -1,0 +1,27 @@
+# Q4: Content Management System (CMS)
+create 'CMSContent', 'content', 'author', 'metadata'
+
+put 'CMSContent', 'C001', 'content:title', 'Getting Started with HBase'
+put 'CMSContent', 'C001', 'content:body', 'An introduction to column-family databases.'
+put 'CMSContent', 'C001', 'author:author_id', 'A007'
+put 'CMSContent', 'C001', 'author:name', 'Neha'
+put 'CMSContent', 'C001', 'metadata:status', 'draft'
+put 'CMSContent', 'C001', 'metadata:updated_at', '2026-10-11'
+
+# Insert another record
+put 'CMSContent', 'C002', 'content:title', 'NoSQL Basics'
+put 'CMSContent', 'C002', 'content:body', 'Overview of NoSQL database models.'
+put 'CMSContent', 'C002', 'author:author_id', 'A008'
+put 'CMSContent', 'C002', 'author:name', 'Rahul'
+put 'CMSContent', 'C002', 'metadata:status', 'published'
+
+# Retrieve and update C001
+get 'CMSContent', 'C001'
+put 'CMSContent', 'C001', 'metadata:status', 'published'
+put 'CMSContent', 'C001', 'content:title', 'Getting Started with Apache HBase'
+get 'CMSContent', 'C001'
+
+# Delete a field and then a record
+delete 'CMSContent', 'C002', 'content:body'
+deleteall 'CMSContent', 'C002'
+scan 'CMSContent'

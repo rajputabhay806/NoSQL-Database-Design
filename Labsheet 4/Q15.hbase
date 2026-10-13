@@ -1,0 +1,35 @@
+# Q15: Mini-project — Event Logging application using HBase
+# Demonstrates create, insert, query, update, delete.
+create 'AppEvents', 'event', 'actor', 'context'
+
+# Insert events
+put 'AppEvents', 'U101#20261011T101500#EVT001', 'event:type', 'LOGIN'
+put 'AppEvents', 'U101#20261011T101500#EVT001', 'event:status', 'SUCCESS'
+put 'AppEvents', 'U101#20261011T101500#EVT001', 'event:timestamp', '2026-10-11T10:15:00'
+put 'AppEvents', 'U101#20261011T101500#EVT001', 'actor:user_id', 'U101'
+put 'AppEvents', 'U101#20261011T101500#EVT001', 'actor:username', 'aarav'
+put 'AppEvents', 'U101#20261011T101500#EVT001', 'context:source_ip', '192.0.2.10'
+
+put 'AppEvents', 'U101#20261011T113000#EVT002', 'event:type', 'PURCHASE'
+put 'AppEvents', 'U101#20261011T113000#EVT002', 'event:status', 'SUCCESS'
+put 'AppEvents', 'U101#20261011T113000#EVT002', 'event:timestamp', '2026-10-11T11:30:00'
+put 'AppEvents', 'U101#20261011T113000#EVT002', 'actor:user_id', 'U101'
+put 'AppEvents', 'U101#20261011T113000#EVT002', 'context:amount', '1499'
+
+put 'AppEvents', 'U102#20261011T120000#EVT003', 'event:type', 'LOGIN'
+put 'AppEvents', 'U102#20261011T120000#EVT003', 'event:status', 'FAILED'
+put 'AppEvents', 'U102#20261011T120000#EVT003', 'event:timestamp', '2026-10-11T12:00:00'
+put 'AppEvents', 'U102#20261011T120000#EVT003', 'actor:user_id', 'U102'
+
+# Query by known row key
+get 'AppEvents', 'U101#20261011T101500#EVT001'
+scan 'AppEvents'
+
+# Update event status
+put 'AppEvents', 'U102#20261011T120000#EVT003', 'event:status', 'REVIEWED'
+get 'AppEvents', 'U102#20261011T120000#EVT003'
+
+# Delete one qualifier and then one complete event
+delete 'AppEvents', 'U101#20261011T113000#EVT002', 'context:amount'
+deleteall 'AppEvents', 'U101#20261011T113000#EVT002'
+scan 'AppEvents'

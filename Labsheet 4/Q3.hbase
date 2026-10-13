@@ -1,0 +1,20 @@
+# Q3: Event logging system
+create 'EventLog', 'event', 'user', 'details'
+
+put 'EventLog', 'EVT#20261011#0001', 'event:timestamp', '2026-10-11T10:15:00'
+put 'EventLog', 'EVT#20261011#0001', 'event:type', 'LOGIN'
+put 'EventLog', 'EVT#20261011#0001', 'event:status', 'SUCCESS'
+put 'EventLog', 'EVT#20261011#0001', 'user:user_id', 'U101'
+put 'EventLog', 'EVT#20261011#0001', 'user:username', 'aarav'
+put 'EventLog', 'EVT#20261011#0001', 'details:source_ip', '192.0.2.10'
+
+put 'EventLog', 'EVT#20261011#0002', 'event:timestamp', '2026-10-11T10:20:00'
+put 'EventLog', 'EVT#20261011#0002', 'event:type', 'PURCHASE'
+put 'EventLog', 'EVT#20261011#0002', 'event:status', 'SUCCESS'
+put 'EventLog', 'EVT#20261011#0002', 'user:user_id', 'U102'
+put 'EventLog', 'EVT#20261011#0002', 'user:username', 'diya'
+put 'EventLog', 'EVT#20261011#0002', 'details:source_ip', '192.0.2.11'
+
+get 'EventLog', 'EVT#20261011#0001'
+get 'EventLog', 'EVT#20261011#0002'
+scan 'EventLog'

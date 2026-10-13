@@ -1,0 +1,23 @@
+# Q6: Column-family data model and qualifiers
+create 'ProductCatalog', 'product', 'inventory', 'pricing'
+
+put 'ProductCatalog', 'P001', 'product:name', 'Wireless Mouse'
+put 'ProductCatalog', 'P001', 'product:brand', 'Acme'
+put 'ProductCatalog', 'P001', 'product:category', 'Accessories'
+put 'ProductCatalog', 'P001', 'inventory:warehouse_north', '25'
+put 'ProductCatalog', 'P001', 'inventory:warehouse_south', '18'
+put 'ProductCatalog', 'P001', 'pricing:currency', 'INR'
+put 'ProductCatalog', 'P001', 'pricing:amount', '799'
+
+put 'ProductCatalog', 'P002', 'product:name', 'Keyboard'
+put 'ProductCatalog', 'P002', 'product:brand', 'KeyCo'
+put 'ProductCatalog', 'P002', 'inventory:warehouse_north', '12'
+put 'ProductCatalog', 'P002', 'pricing:currency', 'INR'
+put 'ProductCatalog', 'P002', 'pricing:amount', '1299'
+
+get 'ProductCatalog', 'P001'
+scan 'ProductCatalog'
+
+# Explanation: product, inventory, and pricing are column families.
+# name, brand, warehouse_north, amount, etc. are qualifiers.
+# Rows may have different qualifiers; absent cells need not be stored.

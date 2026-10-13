@@ -1,0 +1,16 @@
+# Q8: User sessions with TTL (seconds)
+# TTL is configured on the column family; 30 seconds is short for demonstration.
+create 'UserSessions', {NAME => 'session', TTL => 30}, {NAME => 'user', TTL => 30}
+
+put 'UserSessions', 'S001', 'session:token', 'tok-abc'
+put 'UserSessions', 'S001', 'session:created_at', '2026-10-11T10:00:00'
+put 'UserSessions', 'S001', 'session:status', 'active'
+put 'UserSessions', 'S001', 'user:user_id', 'U101'
+put 'UserSessions', 'S002', 'session:token', 'tok-def'
+put 'UserSessions', 'S002', 'session:status', 'active'
+put 'UserSessions', 'S002', 'user:user_id', 'U102'
+
+scan 'UserSessions'
+# Wait longer than 30 seconds, then check again:
+scan 'UserSessions'
+# Note: expired cells are not necessarily physically removed immediately.

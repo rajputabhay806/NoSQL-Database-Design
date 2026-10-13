@@ -1,0 +1,19 @@
+# Q9: Row-key strategy to reduce hotspotting
+# Example: reverse a monotonically increasing identifier or add a hash/bucket prefix.
+create 'OrdersByBucket', 'order', 'customer'
+
+put 'OrdersByBucket', '03#20261011#O1001', 'order:amount', '1499'
+put 'OrdersByBucket', '11#20261011#O1002', 'order:amount', '2499'
+put 'OrdersByBucket', '07#20261011#O1003', 'order:amount', '999'
+put 'OrdersByBucket', '01#20261011#O1004', 'order:amount', '499'
+put 'OrdersByBucket', '11#20261011#O1005', 'order:amount', '1999'
+
+put 'OrdersByBucket', '03#20261011#O1001', 'customer:id', 'C101'
+put 'OrdersByBucket', '11#20261011#O1002', 'customer:id', 'C102'
+put 'OrdersByBucket', '07#20261011#O1003', 'customer:id', 'C103'
+put 'OrdersByBucket', '01#20261011#O1004', 'customer:id', 'C104'
+put 'OrdersByBucket', '11#20261011#O1005', 'customer:id', 'C105'
+
+scan 'OrdersByBucket'
+# The bucket prefix spreads writes across key ranges when pre-splits/ranges are
+# designed to match it. A prefix alone does not guarantee distribution.

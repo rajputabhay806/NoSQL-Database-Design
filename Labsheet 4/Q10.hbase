@@ -1,0 +1,12 @@
+# Q10: Table with multiple regions (pre-split at row-key boundaries)
+# The split keys divide the key space into initial regions.
+create 'RegionalData', 'data', SPLITS => ['m', 't']
+
+put 'RegionalData', 'a001', 'data:value', 'Region-key-range-1'
+put 'RegionalData', 'n001', 'data:value', 'Region-key-range-2'
+put 'RegionalData', 'z001', 'data:value', 'Region-key-range-3'
+
+scan 'RegionalData'
+status 'detailed'
+# HBase assigns regions to RegionServers. With a multi-node cluster, inspect
+# the HBase UI / master status to see region placement across RegionServers.

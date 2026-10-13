@@ -1,0 +1,32 @@
+Q15 — Event Logging with HBase: Design Notes
+
+Selected application: Event Logging.
+
+Schema:
+- Table: AppEvents
+- Column family `event`: type, status, timestamp
+- Column family `actor`: user_id, username
+- Column family `context`: source_ip, amount, and other event-specific attributes
+- Row key: user_id#timestamp#event_id
+
+Operations demonstrated in Q15.hbase:
+1. Create the table and its column families.
+2. Insert multiple sample events.
+3. Retrieve a record by its complete row key and scan the table.
+4. Update an event status by writing a new value to the same cell.
+5. Delete a qualifier and delete a complete row.
+
+Consistency and availability:
+HBase provides strongly consistent reads and writes at the row level. Availability depends on the HBase/HDFS cluster, RegionServer health, replication, and recovery configuration.
+
+Transactions:
+HBase supports atomic operations within a single row, but it does not provide general multi-row ACID transactions through ordinary shell commands.
+
+Query features:
+Direct row-key lookups are efficient. Scans can retrieve ranges of row keys. Arbitrary queries such as “all events of type PURCHASE” are not automatically indexed; design row keys for common access patterns or maintain secondary/index tables.
+
+Scaling:
+Tables are split into regions by row-key ranges and served by RegionServers. A row key beginning with user_id makes per-user access straightforward, but a very high-volume user can create a hotspot. At larger scale, consider a bucket/hash prefix and carefully chosen pre-splits. The row-key strategy must match expected query patterns.
+
+Note:
+The HBase shell commands are a teaching demonstration. Production deployments require authentication, suitable cluster configuration, capacity planning, and operational monitoring.

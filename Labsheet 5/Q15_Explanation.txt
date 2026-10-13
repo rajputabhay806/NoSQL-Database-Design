@@ -1,0 +1,6 @@
+Q15 — Neo4j Graph Database Application
+Application: a small social network.
+Node: Person(person_id, name, city).
+Relationship: FRIENDS_WITH.
+Q15.py demonstrates create/upsert (MERGE), read (MATCH), update (SET), delete (DETACH DELETE), and relationship traversal.
+Graph databases make connected-data queries natural. Neo4j transactions provide atomic commit/rollback within a transaction. Availability and scaling depend on edition, topology, workload, and configuration; a single local instance is not highly available by itself.
